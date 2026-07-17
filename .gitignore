@@ -1,0 +1,5 @@
+.venv/
+energy_market.db
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
