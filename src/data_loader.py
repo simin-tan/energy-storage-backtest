@@ -1,7 +1,7 @@
 import sqlite3
 import pandas as pd
 
-def fetch_and_clean_data(db_path="energy_market.db"):
+def fetch_and_clean_data(db_path="data/energy_market.db"):
     # 1. Pull data via SQL
     conn = sqlite3.connect(db_path)
     df = pd.read_sql_query("SELECT * FROM market_prices", conn)
