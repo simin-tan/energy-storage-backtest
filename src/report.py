@@ -66,5 +66,5 @@ def generate_report(df):
     )
     
     # Automatically export it as a clean HTML file
-    fig.write_html("battery_performance_report.html")
+    fig.write_html("outputs/battery_performance_report.html")
     print("Interactive HTML report generated successfully!")
