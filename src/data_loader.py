@@ -24,5 +24,16 @@ def fetch_and_clean_data(db_path="data/energy_market.db"):
     df = df.tz_localize('Europe/Berlin', ambiguous='NaT', nonexistent='shift_forward')
     df = df.tz_convert('UTC')
     
+    # 5. Drop rows made ambiguous by the DST transition (see step 4).
+    # ambiguous='NaT' marks the repeated fall-back hour as NaT rather than
+    # guessing which offset it belongs to. These rows still have valid
+    # prices and would otherwise be silently traded on with an unusable
+    # timestamp, so they're removed here.
+    n_before = len(df)
+    df = df[df.index.notna()]
+    n_dropped = n_before - len(df)
+    if n_dropped:
+        print(f"Dropped {n_dropped} row(s) with ambiguous DST timestamps")
+
     print(f"Cleaned rows processed: {len(df)}")
     return df

@@ -7,13 +7,13 @@ def main():
 
     cleaned_df = fetch_and_clean_data()
 
-    simulated_data = run_battery_backtest(
-        cleaned_df
-    )
+    # interval_hours made explicit: current data source is hourly.
+    # If energy_market.db is ever regenerated at a different resolution
+    # (e.g. 15-min), this must be updated to match, or energy/revenue
+    # calculations will be silently wrong.
+    simulated_data = run_battery_backtest(cleaned_df, interval_hours=1.0)
 
-    generate_report(
-        simulated_data
-    )
+    generate_report(simulated_data)
 
 
 if __name__ == "__main__":

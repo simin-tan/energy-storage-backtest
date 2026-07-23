@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 
 
-def create_mock_database(db_path="energy_market.db"):
+def create_mock_database(db_path="data/energy_market.db"):
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
