@@ -17,14 +17,14 @@ def generate_report(df):
         secondary_y = False
     )
 
-    # Add battery state of charge over time
+    # Net trading revenue
     fig.add_trace(
         go.Scatter(
             x = df.index,
-            y = df['state_of_charge_mwh'],
-            mode = 'lines',
-            name = 'Battery State of Charge (MWh)',
-            line = dict(color='blue', width=2)
+            y=df['revenue_eur'].cumsum(),
+            mode='lines',
+            name='Cumulative Revenue (EUR)',
+            line=dict(color='gold', width=2)
         ),
         secondary_y = True
     )
@@ -49,8 +49,11 @@ def generate_report(df):
         marker = dict(color='red', size=7)
     ))
     
+    total_net_trading_revenue = df['revenue_eur'].sum()
+
     fig.update_layout(
-        title = "Automated Battery Storage Asset Backtest Simulation",
+        title = f"Automated Battery Storage Asset Backtest Simulation"
+                f"<br><sub>Total Net Trading Revenue (excl. capex/degradation): {total_net_trading_revenue:.2f} EUR</sub>",
         xaxis_title = "Timestamp (UTC)",
         template = "plotly_dark"
     )
@@ -61,7 +64,7 @@ def generate_report(df):
     )
 
     fig.update_yaxes(
-        title_text = 'State of Charge (MWh)',
+        title_text = 'Cumulative Net Trading Revenue (EUR)',
         secondary_y = True
     )
     

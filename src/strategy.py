@@ -90,9 +90,9 @@ def run_battery_backtest(df, interval_hours=1.0):
         # Record the battery state after this timestep
         backtest_df.at[index, 'state_of_charge_mwh'] = state_of_charge_mwh
 
-    total_profit = backtest_df['revenue_eur'].sum()
+    total_net_trading_revenue = backtest_df['revenue_eur'].sum()
     print("--- Backtest Results ---")
-    print(f"Total simulated trading profit: {total_profit:.2f} EUR")
+    print(f"Total net trading revenue: {total_net_trading_revenue:.2f} EUR")
     print(f"Final battery state of charge: {state_of_charge_mwh:.1f} MWh")
     
     return backtest_df
