@@ -17,18 +17,6 @@ def generate_report(df):
         secondary_y = False
     )
 
-    # Net trading revenue
-    fig.add_trace(
-        go.Scatter(
-            x = df.index,
-            y=df['revenue_eur'].cumsum(),
-            mode='lines',
-            name='Cumulative Revenue (EUR)',
-            line=dict(color='gold', width=2)
-        ),
-        secondary_y = True
-    )
-
     # Highlight Charge points
     charge_events = df[df['action'] == 'CHARGE']
     fig.add_trace(go.Scatter(
@@ -64,7 +52,7 @@ def generate_report(df):
     )
 
     fig.update_yaxes(
-        title_text = 'Cumulative Net Trading Revenue (EUR)',
+        title_text = 'State of Charge (MWh)',
         secondary_y = True
     )
     
